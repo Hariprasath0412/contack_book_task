@@ -32,6 +32,14 @@ header {
 nav {
   padding: 10px 20px;
   text-align: end;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.nav-icon {
+  width: 40px;
+  height: 30px;
 }
 
 nav a {
@@ -40,6 +48,15 @@ nav a {
   cursor: pointer;
   font-size: 24px;
   font-weight: 600;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  background-color: #82c91e;
+  padding-right: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 12px;
 }
 .search {
   position: relative;
@@ -52,17 +69,21 @@ nav a {
   height: 40px;
 }
 .searching-box {
+  font-size: 20px;
   width: 400px;
   height: 40px;
   border-radius: 20px;
   padding-left: 55px;
 }
+.searching-box:focus {
+  font-size: 20px;
+}
 .search-box-icon {
-  width: 40px;
+  width: 35px;
   height: 40px;
   position: absolute;
   top: 0;
-  left: 75px;
+  left: 5px;
 }
 .filter-search {
   border: none;
@@ -97,20 +118,40 @@ nav a {
   align-items: center;
   justify-content: center;
 }
-main {
+
+.view-all-btn {
+  font-size: 22px;
+  padding: 10px 0;
+  border-radius: 10px;
+  background-color: #ced4da;
+  border: 2px solid black;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: 700;
+  margin-left: 20px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.tick-icon {
+  height: 30px;
+  width: 30px;
+}
+table {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
   margin-top: 20px;
 }
+td {
+  margin-bottom: 20px;
+}
+
 .each-contact {
   display: grid;
   grid-template-columns: auto 1fr auto;
   column-gap: 20px;
-}
-.detial-section {
-  grid-column: 2/4;
-  grid-row: 2/3;
 }
 .each-contact {
   border: 5px solid black;
@@ -119,10 +160,37 @@ main {
   box-shadow: 0 0 10px;
 }
 
+.star-icon {
+  width: 30px;
+  height: 30px;
+  fill: yellow;
+}
+.detial-section {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  display: none;
+}
+.each-contact h3 {
+  margin-right: auto;
+}
 .each-contact h3,
 .each-contact p {
   font-size: 30px;
   padding: 10px;
+}
+.inbox-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+}
+.email-icon {
+  fill: #868e96;
+}
+.ph-icon {
+  fill: green;
+}
+.add-icon {
+  fill: #fd7e14;
 }
 .other-btn {
   grid-column: 3/4;
@@ -132,11 +200,42 @@ main {
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  display: none;
 }
-
+.view-btn {
+  font-size: 22px;
+  padding: 10px 0;
+  border-radius: 10px;
+  background-color: #74c0fc;
+  border: 2px solid black;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: 700;
+}
 .btn {
   font-size: 20px;
   padding: 10px;
   border-radius: 10px;
   background-color: #74c0fc;
+}
+
+/* All the check box section are below
+   Helps is toggling the contents inside a book*/
+#all-toggle:checked ~ table .all-toggle-detail {
+  display: grid;
+}
+#all-toggle:checked ~ table .all-toggle-btn {
+  display: flex;
+}
+#view-toggle-1:checked ~ .detial-section {
+  display: grid;
+}
+#view-toggle-1:checked ~ .other-btn {
+  display: flex;
+}
+#view-toggle-2:checked ~ .detial-section {
+  display: grid;
+}
+#view-toggle-2:checked ~ .other-btn {
+  display: flex;
 }
