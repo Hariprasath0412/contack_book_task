@@ -47,6 +47,8 @@ nav a {
   background-color: #8ce99a;
   border-radius: 20px;
   box-shadow: 0 0 12px #e9b98c;
+  margin-bottom: 50px;
+  height: 80vh;
 }
 .contact-details {
   margin: 20px;
@@ -60,8 +62,16 @@ nav a {
 .input-fields {
   margin-left: 20px;
 }
+.phone-number {
+  display: flex;
+  gap: 10px;
+}
+.country-code {
+  border-radius: 8px;
+}
 input {
-  padding: 10px 30px;
+  padding: 10px 0px;
+  padding-right: 30px;
   border-radius: 8px;
   margin-right: 20px;
 }
@@ -85,9 +95,11 @@ label {
 }
 
 .about-app h2 {
-  font-size: 32px;
+  font-size: 40px;
   text-align: center;
   margin-top: 15px;
+  color: #228be6;
+  margin-bottom: 30px;
 }
 
 .section-1 {
@@ -97,6 +109,9 @@ label {
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   column-gap: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 50px;
 }
 .infos-column-1 {
   grid-column: 1/3;
@@ -141,8 +156,8 @@ label {
 .img-column-2 {
   grid-column: 1/2;
   grid-row: 1/2;
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 90%;
   padding: 20px 20px;
   border-radius: 30px;
   display: flex;
