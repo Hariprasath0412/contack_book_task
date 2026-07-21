@@ -49,29 +49,62 @@
       </svg>
       <h1 class="heading-name">Contact book</h1>
       <nav>
-        <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 nav-icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-</svg>
-Home</a>
-        <a href="contact-page.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 nav-icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-</svg>
-Add Contacts</a>
+        <a href="index.html"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6 nav-icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            />
+          </svg>
+          Home</a
+        >
+        <a href="contact-page.html"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6 nav-icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z"
+            />
+          </svg>
+          Add Contacts</a
+        >
       </nav>
     </header>
 
+    <section class="about-app">
+      <h2 class="header-name">All your contacts in one page</h2>
+    </section>
     <section class="main-contact-section">
       <form class="contact-details">
         <div class="input-fields">
           <label for="person-name">Name</label>
           <br />
-          <input type="text" id="person-name" />
+          <input type="text" id="person-name" placeholder="Enter name " />
         </div>
 
         <div class="input-fields">
           <label for="person-mail">Email</label>
           <br />
-          <input type="email" id="person-mail" />
+          <input
+            type="email"
+            id="person-mail"
+            placeholder="Enter email address"
+          />
         </div>
 
         <div class="input-fields">
@@ -79,72 +112,72 @@ Add Contacts</a>
           <br />
           <div class="phone-number">
             <select class="country-code">
-              <option value="null"> </option>
+              <option value="null"></option>
               <option value="1">+1</option>
               <option value="2">+2</option>
               <option value="3">+91</option>
               <option value="92">+92</option>
             </select>
-            <input type="tel" id="person-phone" />
+            <input type="tel" id="person-phone" placeholder="Enter mobile no" />
           </div>
         </div>
 
-        <div class="input-fields">
+        <div class="input-fields address-field">
           <label for="person-address">Address</label>
           <br />
-          <input type="text" id="person-address" />
+          <textarea
+            type="textarea"
+            id="person-address"
+            placeholder="Enter Address here"
+          ></textarea>
         </div>
 
-        <button class="add-contact-btn"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 add-cont-icon">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-</svg>
-Add to contact</button>
-
+        <button class="add-contact-btn">
+          <svg
+            width="800px"
+            height="800px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="add-cont-icon"
+          >
+            <path
+              d="M16 8.98987V20.3499C16 21.7999 14.96 22.4099 13.69 21.7099L9.76001 19.5199C9.34001 19.2899 8.65999 19.2899 8.23999 19.5199L4.31 21.7099C3.04 22.4099 2 21.7999 2 20.3499V8.98987C2 7.27987 3.39999 5.87988 5.10999 5.87988H12.89C14.6 5.87988 16 7.27987 16 8.98987Z"
+              stroke="#292D32"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M22 5.10999V16.47C22 17.92 20.96 18.53 19.69 17.83L16 15.77V8.98999C16 7.27999 14.6 5.88 12.89 5.88H8V5.10999C8 3.39999 9.39999 2 11.11 2H18.89C20.6 2 22 3.39999 22 5.10999Z"
+              stroke="#292D32"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7 12H11"
+              stroke="#292D32"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M9 14V10"
+              stroke="#292D32"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          Save contact
+        </button>
       </form>
       <img
         src="images/contact-box-stock-image.jpg"
         class="contact-book-image"
         alt="contact_book_image"
       />
-    </section>
-
-    <section class="about-app">
-      <h2>All your contacts in one page</h2>
-      <div class="about-sections">
-        <div class="section-1">
-          <div class="infos-column-1">
-            <h3>Store More info</h3>
-            <p>You can store more information along with the phone number, email, adress etc...</p>
-          </div>
-          <img src="images/no_1_img.jpg" class="img-column"></img>
-        </div>
-
-        <div class="section-1">
-          <div class="infos-column-2">
-            <h3>Filter your Search</h3>
-            <p>You can store more information along with the phone number, email, adress etc...</p>
-          </div>
-          <img src="images/filter_img.png" class="img-column-2"></img>
-        </div>      
-
-         <div class="section-1">
-          <div class="infos-column-1">
-            <h3>Contact them directly </h3>
-            <p>You can store more information along with the phone number, email, adress etc...</p>
-          </div>
-          <img src="images/no_1_img.jpg" class="img-column"></img>
-        </div>  
-
-        <div class="section-1">
-          <div class="infos-column-2">
-            <h3>Easy to Use</h3>
-            <p>You can store more information along with the phone number, email, adress etc...</p>
-          </div>
-          <img src="images/no_1_img.jpg" class="img-column-2"></img>
-        </div>
-      </div>
-
-
     </section>
   </body>
 </html>
