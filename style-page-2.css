@@ -54,7 +54,7 @@ nav a {
   color: black;
   display: flex;
   align-items: center;
-  background-color: #82c91e;
+  background-color: #ffc078;
   padding-right: 12px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -86,6 +86,18 @@ nav a {
 .searching-box:focus {
   font-size: 20px;
 }
+select {
+  outline: none;
+}
+option:first-child {
+  background-color: white;
+}
+option:hover {
+  background-color: black;
+}
+option {
+  background-color: #dee2e6;
+}
 
 .search-box-icon {
   width: 35px;
@@ -94,12 +106,14 @@ nav a {
   top: 2.5px;
   left: 5px;
 }
+
 .filter-search {
   border: none;
   font-size: 20px;
   font-weight: 700;
   padding-right: 50px;
 }
+
 .filter-module {
   display: flex;
   align-items: center;
@@ -109,17 +123,21 @@ nav a {
   border-radius: 10px;
   background-color: white;
 }
+
 .filter-icon {
   width: 30px;
   height: 30px;
 }
+
 .sort-box {
   display: flex;
 }
+
 .sort-icon {
   width: 30px;
   height: 40px;
 }
+
 .sort-module {
   display: flex;
   border: 3px solid black;
@@ -141,8 +159,13 @@ nav a {
   font-weight: 700;
   margin-left: 20px;
   margin-top: 20px;
-  display: inline-block;
+  /* display: inline-block; */
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  width: 160px;
 }
 
 .tick-icon {
@@ -156,8 +179,14 @@ table {
   width: 100%;
   margin-top: 20px;
 }
+
 td {
   margin-bottom: 20px;
+  background-color: #aee1ec;
+  background-image:
+    url(images/img-1.avif), linear-gradient(to right, #c0e9f1, #96d2e0);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .each-contact {
@@ -188,29 +217,43 @@ td {
     max-height 0.5s ease,
     opacity 0.5s ease;
 }
+
+.detial-section a {
+  text-decoration: none;
+}
+
 .each-contact h3 {
   margin-right: auto;
 }
+
 .each-contact h3,
 .each-contact p {
   font-size: 30px;
   padding: 10px;
 }
+
 .inbox-icon {
   width: 30px;
   height: 30px;
   margin-right: 20px;
   cursor: pointer;
 }
+
 .email-icon {
   fill: #868e96;
+  stroke: black;
 }
+
 .ph-icon {
   fill: green;
+  stroke: green;
 }
+
 .add-icon {
   fill: #fd7e14;
+  stroke: #fd7e14;
 }
+
 .other-btn {
   grid-column: 3/4;
   grid-row: 2/3;
@@ -264,36 +307,33 @@ td {
 .btn:hover {
   transform: scale(1.05);
 }
+
 /* All the check box section are below
    Helps is toggling the contents inside a book*/
 
 #all-toggle:checked ~ table .all-toggle-detail {
-  max-height: 500px;
+  max-height: 600px;
   opacity: 1;
   display: grid;
 }
 #all-toggle:checked ~ table .all-toggle-btn {
-  max-height: 500px;
+  max-height: 600px;
   opacity: 1;
   display: flex;
 }
 #view-toggle-1:checked ~ .detial-section {
-  display: grid;
-  max-height: 500px;
+  max-height: 600px;
   opacity: 1;
 }
 #view-toggle-1:checked ~ .other-btn {
-  display: flex;
-  max-height: 500px;
+  max-height: 600px;
   opacity: 1;
 }
 #view-toggle-2:checked ~ .detial-section {
-  display: grid;
-  max-height: 500px; /* Set a value larger than the content height */
+  max-height: 600px;
   opacity: 1;
 }
 #view-toggle-2:checked ~ .other-btn {
-  display: flex;
-  max-height: 500px; /* Set a value larger than the content height */
+  max-height: 600px;
   opacity: 1;
 }
