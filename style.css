@@ -47,7 +47,7 @@ nav {
 
 nav a {
   font-size: 18px;
-  padding-left: 12px;
+  padding-left: 10px;
   cursor: pointer;
   font-size: 24px;
   font-weight: 600;
@@ -56,10 +56,10 @@ nav a {
   display: flex;
   align-items: center;
   background-color: #ffc078;
-  padding-right: 12px;
+  padding-right: 8px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .about-app h2 {
@@ -109,6 +109,7 @@ nav a {
   background-color: white;
   border: 2px solid black;
   font-size: 20px;
+  user-select: none;
 }
 input {
   font-size: 20px;
@@ -181,7 +182,7 @@ textarea {
   border: 2px solid black;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   nav a {
     font-size: 22px;
   }
@@ -270,6 +271,9 @@ textarea {
   nav a {
     font-size: 16px;
   }
+  .contact-details {
+    row-gap: 40px;
+  }
   .contact-book-image {
     width: 250px;
     height: 250px;
@@ -336,10 +340,36 @@ textarea {
     font-size: 26px;
   }
 }
+@media (max-width: 510px) {
+  .contact-book-image {
+    width: 230px;
+    height: 230px;
+  }
+}
+@media (max-width: 456px) {
+  .heading-name {
+    font-size: 15px;
+    padding-left: 10px;
+  }
+  nav a {
+    font-size: 12px;
+    padding: 5px 7px 5px 4px;
+  }
+  .nav-icon {
+    width: 28px;
+    height: 18px;
+  }
+}
 
+@media (max-width: 444px) {
+  .contact-book-image {
+    width: 210px;
+    height: 210px;
+  }
+}
 /* Media queries for small mobiles*/
 
-@media (max-width: 490px) {
+@media (max-width: 425px) {
   .contact-icon {
     width: 30px;
     height: 30px;
@@ -371,9 +401,9 @@ textarea {
     font-size: 12px;
   }
   .country-code {
-    height: 35px;
+    height: 30px;
     font-size: 12px;
-    width: 54px;
+    width: 50px;
   }
 
   input,
@@ -398,9 +428,9 @@ textarea {
   }
 }
 
-@media (max-width: 386px) {
+@media (max-width: 375px) {
   .heading-name {
-    padding-right: 0;
+    padding-left: 5px;
   }
   nav {
     padding-right: 0;
@@ -420,11 +450,41 @@ textarea {
   label {
     font-size: 14px;
   }
+  .add-contact-btn {
+    margin-right: 0;
+  }
+  .country-code {
+    width: 38px;
+  }
 }
 
-@media (max-width: 364px) {
+@media (max-width: 320px) {
   .about-app h2 {
     font-size: 18px;
     letter-spacing: 1px;
+  }
+  .heading-name {
+    font-size: 14px;
+  }
+  .add-contact-btn {
+    margin-left: 20px;
+    font-size: 12px;
+    padding: 3px 4px 4px;
+  }
+  input,
+  textarea {
+    height: 30px;
+  }
+  input,
+  input:focus {
+    font-size: 11px;
+  }
+  label {
+    font-size: 15px;
+  }
+  .country-code {
+    height: 30px;
+    font-size: 12px;
+    width: 30px;
   }
 }
