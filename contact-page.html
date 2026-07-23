@@ -6,7 +6,6 @@
     <title>View contacts</title>
     <link rel="stylesheet" href="style-page-2.css" />
     <link rel="stylesheet" href="style.css" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -127,7 +126,6 @@
           <option>Filter</option>
           <option>Most recent</option>
           <option>Oldest</option>
-          <option>Visited</option>
           <option>Starred</option>
         </select>
       </div>
@@ -176,11 +174,14 @@
           </svg> </span
         ><span> View All </span>
       </label>
+      <div class="no-contact">
+        <p>No Contacts Yet</p>
+      </div>
       <table>
         <tr>
           <td class="each-contact">
-            <p>1</p>
-            <h3>
+            <p class="serial-no">1</p>
+            <p class="person-name">
               Hariprasath
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -188,7 +189,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="size-6 star-icon"
+                class="size-6 star-icon starred"
               >
                 <path
                   stroke-linecap="round"
@@ -196,7 +197,7 @@
                   d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
                 />
               </svg>
-            </h3>
+            </p>
 
             <input
               type="checkbox"
@@ -206,8 +207,9 @@
             <label class="view-btn" for="view-toggle-1">
               <span>View</span>
             </label>
+
             <section class="detial-section all-toggle-detail">
-              <p>
+              <p class="person-email">
                 <a href="mailto:harimohan2k04@gmail.com" target="_blank">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +228,7 @@
                 </a>
                 harimohan2k04@gmail.com
               </p>
-              <p>
+              <p class="person-ph-no">
                 <a href="tel:+919629535105">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -245,7 +247,7 @@
                 </a>
                 9629535105
               </p>
-              <p>
+              <p class="person-address">
                 <a href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +269,7 @@
               </p>
             </section>
             <section class="other-btn all-toggle-btn">
-              <button class="btn">
+              <button class="btn edit">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -283,7 +285,7 @@
                   />
                 </svg>
               </button>
-              <button class="btn">
+              <button class="btn delete">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -305,8 +307,25 @@
 
         <tr>
           <td class="each-contact">
-            <p>2</p>
-            <h3>John doe</h3>
+            <p class="serial-no">2</p>
+            <p class="person-name">
+              John doe
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6 star-icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+            </p>
+
             <input
               type="checkbox"
               id="view-toggle-2"
@@ -315,9 +334,10 @@
             <label class="view-btn" for="view-toggle-2">
               <span>View</span>
             </label>
+
             <section class="detial-section all-toggle-detail">
-              <p>
-                <a href="mailto:harimohan2k04@gmail.com" target="_blank">
+              <p class="person-email">
+                <a href="mailto:johndoe1973@gmail.com" target="_blank">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -333,11 +353,10 @@
                     />
                   </svg>
                 </a>
-
-                harimohan2k04@gmail.com
+                johndoe1973@gmail.com
               </p>
-              <p>
-                <a href="tel:+919629535105">
+              <p class="person-ph-no">
+                <a href="tel:(337) 780-7473">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -353,9 +372,9 @@
                     />
                   </svg>
                 </a>
-                : 9629535105
+                (337) 780-7473
               </p>
-              <p>
+              <p class="person-address">
                 <a href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -372,8 +391,8 @@
                     />
                   </svg>
                 </a>
-                Sf no 579 veeranam palayam village bagavathi palayam naal road,
-                kangayam
+
+                221 Endicott Way, Deland, FL 32724
               </p>
             </section>
             <section class="other-btn all-toggle-btn">

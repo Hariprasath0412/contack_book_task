@@ -181,12 +181,12 @@ textarea {
   height: 46px;
   border: 2px solid black;
 }
-@media (max-width: 1100px) {
-  .contact-book-image {
-    width: 420px;
-    height: 420px;
-  }
-}
+
+/* --------------------------------
+-----------------------------------
+Media query close to Small laptops 
+----------------------------------
+----------------------------------*/
 
 @media (max-width: 1024px) {
   nav a {
@@ -224,48 +224,17 @@ textarea {
   }
 }
 
-@media (max-width: 970px) {
-  nav a {
-    font-size: 18px;
-  }
-  .heading-name {
-    font-size: 26px;
-  }
-  .contact-icon {
-    width: 44px;
-    height: 44px;
-    margin-top: 10px;
-  }
-  .about-app h2 {
-    font-size: 36px;
-    margin-bottom: 30px;
-  }
-  .contact-book-image {
-    width: 320px;
-    height: 320px;
-  }
-  textarea,
-  textarea:focus {
-    font-size: 16px;
-  }
-  input,
-  textarea {
-    height: 35px;
-  }
-  input,
-  input:focus {
-    font-size: 16px;
-  }
-  label {
-    font-size: 22px;
-  }
-}
+/* --------------------------------
+-----------------------------------
+Media query close to most tablets 
+----------------------------------
+----------------------------------*/
 
-/* media query close to most tablets */
 @media (max-width: 768px) {
   .contact-icon {
     width: 38px;
     height: 38px;
+    margin: auto 0;
   }
   .heading-name {
     font-size: 22px;
@@ -277,6 +246,10 @@ textarea {
   }
   nav a {
     font-size: 16px;
+  }
+  .about-app h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
   }
   .contact-details {
     row-gap: 40px;
@@ -321,47 +294,17 @@ textarea {
   }
 }
 
-@media (max-width: 680px) {
-  .about-app h2 {
-    font-size: 32px;
-  }
-  .contact-details {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .input-fields {
-    width: 100%;
-  }
-  textarea {
-    height: 50px;
-  }
-}
+/* --------------------------------
+-----------------------------------
+Media query close to most mobiles
+----------------------------------
+----------------------------------*/
 
-@media (max-width: 550px) {
-  .heading-name {
-    padding-right: 0;
-  }
-  .about-app h2 {
-    letter-spacing: 2px;
-    font-size: 26px;
-  }
-}
-@media (max-width: 510px) {
-  .contact-book-image {
-    width: 230px;
-    height: 230px;
-  }
-}
-@media (max-width: 490px) {
-  .add-contact-btn {
-    margin-left: 30px;
-  }
-}
-@media (max-width: 456px) {
+@media (max-width: 426px) {
   .heading-name {
     font-size: 20px;
     padding-left: 10px;
+    padding-right: 0;
   }
   nav {
     flex-direction: column;
@@ -376,14 +319,54 @@ textarea {
     width: 28px;
     height: 18px;
   }
-  .contact-book-image {
-    width: 210px;
-    height: 210px;
-  }
   .contact-icon {
     width: 40px;
     height: 40px;
     margin: auto 0;
+  }
+
+  .about-app h2 {
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+  .contact-details {
+    margin-left: 0px;
+    row-gap: 10px;
+  }
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .contact-book-image {
+    width: 200px;
+    height: 200px;
+  }
+  textarea,
+  textarea:focus {
+    font-size: 16px;
+  }
+  textarea {
+    height: 70px;
+  }
+  .country-code {
+    height: 35px;
+    font-size: 14px;
+    width: 50px;
+  }
+
+  input {
+    height: 35px;
+  }
+  input,
+  input:focus {
+    font-size: 16px;
+  }
+  .input-fields {
+    width: 100%;
+  }
+  label {
+    font-size: 18px;
   }
   .add-cont-icon {
     height: 14px;
@@ -393,69 +376,10 @@ textarea {
     align-items: flex-end;
     font-size: 14px;
     padding: 10px;
+    margin-left: 30px;
   }
 }
 
-/* Media queries for small mobiles*/
-
-@media (max-width: 425px) {
-  /* .contact-icon {
-    width: 30px;
-    height: 30px;
-  } */
-  /* .heading-name {
-    font-size: 15px;
-    padding-left: 10px;
-  } */
-  .nav-icon {
-    width: 28px;
-    height: 18px;
-  }
-  /* nav a {
-    font-size: 12px;
-    padding: 5px 7px 5px 4px;
-  } */
-  .about-app h2 {
-    font-size: 22px;
-  }
-  .contact-details {
-    margin-left: 0px;
-  }
-  .contact-book-image {
-    width: 200px;
-    height: 200px;
-  }
-  textarea,
-  textarea:focus {
-    font-size: 12px;
-  }
-  .country-code {
-    height: 30px;
-    font-size: 12px;
-    width: 50px;
-  }
-
-  input,
-  textarea {
-    height: 30px;
-  }
-  input,
-  input:focus {
-    font-size: 12px;
-  }
-  label {
-    font-size: 16px;
-  }
-}
-@media (max-width: 390px) {
-  .phone-number {
-    display: flex;
-    flex-direction: column;
-  }
-  .country-code {
-    width: 50px;
-  }
-}
 @media (max-width: 376px) {
   .heading-name {
     padding-left: 5px;
@@ -472,25 +396,39 @@ textarea {
     width: 180px;
     height: 180px;
   }
+  .phone-number {
+    display: flex;
+    flex-direction: column;
+  }
+  .country-code {
+    width: 50px;
+  }
   .contact-details {
     row-gap: 10px;
   }
+  input {
+    height: 32px;
+  }
+  input,
+  input:focus {
+    font-size: 15px;
+  }
   label {
-    font-size: 14px;
+    font-size: 16px;
+  }
+  .country-code {
+    height: 30px;
   }
   .add-contact-btn {
     margin-right: 0;
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 321px) {
   .about-app h2 {
     font-size: 18px;
     letter-spacing: 1px;
   }
-  /* .heading-name {
-    font-size: 14px;
-  } */
   .add-contact-btn {
     margin-left: 20px;
     font-size: 12px;
@@ -498,12 +436,13 @@ textarea {
   }
 
   input,
-  textarea {
-    height: 30px;
-  }
-  input,
   input:focus {
-    font-size: 11px;
+    font-size: 12px;
+  }
+  textarea,
+  textarea:focus {
+    font-size: 12px;
+    height: 50px;
   }
   label {
     font-size: 15px;
