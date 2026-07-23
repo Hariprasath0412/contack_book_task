@@ -181,6 +181,12 @@ textarea {
   height: 46px;
   border: 2px solid black;
 }
+@media (max-width: 1100px) {
+  .contact-book-image {
+    width: 420px;
+    height: 420px;
+  }
+}
 
 @media (max-width: 1024px) {
   nav a {
@@ -190,6 +196,7 @@ textarea {
     font-size: 28px;
   }
   .contact-icon {
+    margin: auto;
     width: 50px;
     height: 50px;
   }
@@ -255,7 +262,7 @@ textarea {
 }
 
 /* media query close to most tablets */
-@media (max-width: 798px) {
+@media (max-width: 768px) {
   .contact-icon {
     width: 38px;
     height: 38px;
@@ -346,46 +353,68 @@ textarea {
     height: 230px;
   }
 }
+@media (max-width: 490px) {
+  .add-contact-btn {
+    margin-left: 30px;
+  }
+}
 @media (max-width: 456px) {
   .heading-name {
-    font-size: 15px;
+    font-size: 20px;
     padding-left: 10px;
   }
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
   nav a {
-    font-size: 12px;
+    font-size: 16px;
     padding: 5px 7px 5px 4px;
   }
   .nav-icon {
     width: 28px;
     height: 18px;
   }
-}
-
-@media (max-width: 444px) {
   .contact-book-image {
     width: 210px;
     height: 210px;
   }
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+  }
+  .add-cont-icon {
+    height: 14px;
+    width: 14px;
+  }
+  .add-contact-btn {
+    align-items: flex-end;
+    font-size: 14px;
+    padding: 10px;
+  }
 }
+
 /* Media queries for small mobiles*/
 
 @media (max-width: 425px) {
-  .contact-icon {
+  /* .contact-icon {
     width: 30px;
     height: 30px;
-  }
-  .heading-name {
+  } */
+  /* .heading-name {
     font-size: 15px;
     padding-left: 10px;
-  }
+  } */
   .nav-icon {
     width: 28px;
     height: 18px;
   }
-  nav a {
+  /* nav a {
     font-size: 12px;
     padding: 5px 7px 5px 4px;
-  }
+  } */
   .about-app h2 {
     font-size: 22px;
   }
@@ -417,18 +446,17 @@ textarea {
   label {
     font-size: 16px;
   }
-  .add-contact-btn {
-    align-items: flex-end;
-    font-size: 14px;
-    padding: 10px;
+}
+@media (max-width: 390px) {
+  .phone-number {
+    display: flex;
+    flex-direction: column;
   }
-  .add-cont-icon {
-    height: 14px;
-    width: 14px;
+  .country-code {
+    width: 50px;
   }
 }
-
-@media (max-width: 375px) {
+@media (max-width: 376px) {
   .heading-name {
     padding-left: 5px;
   }
@@ -453,9 +481,6 @@ textarea {
   .add-contact-btn {
     margin-right: 0;
   }
-  .country-code {
-    width: 38px;
-  }
 }
 
 @media (max-width: 320px) {
@@ -463,14 +488,15 @@ textarea {
     font-size: 18px;
     letter-spacing: 1px;
   }
-  .heading-name {
+  /* .heading-name {
     font-size: 14px;
-  }
+  } */
   .add-contact-btn {
     margin-left: 20px;
     font-size: 12px;
     padding: 3px 4px 4px;
   }
+
   input,
   textarea {
     height: 30px;
@@ -485,6 +511,5 @@ textarea {
   .country-code {
     height: 30px;
     font-size: 12px;
-    width: 30px;
   }
 }

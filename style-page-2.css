@@ -147,7 +147,9 @@ option {
   align-items: center;
   background-color: white;
 }
-
+.display-none-input {
+  display: none;
+}
 .view-all-btn {
   font-size: 22px;
   padding: 10px 0;
@@ -231,7 +233,9 @@ td {
   font-size: 30px;
   padding: 10px;
 }
-
+.detial-section p {
+  overflow-wrap: break-word;
+}
 .inbox-icon {
   width: 30px;
   height: 30px;
@@ -242,16 +246,19 @@ td {
 .email-icon {
   fill: #868e96;
   stroke: black;
+  margin-right: 3px;
 }
 
 .ph-icon {
   fill: green;
   stroke: green;
+  margin-right: 3px;
 }
 
 .add-icon {
   fill: #fd7e14;
   stroke: #fd7e14;
+  margin-right: 3px;
 }
 
 .other-btn {
@@ -293,7 +300,6 @@ td {
   border-radius: 10px;
   background-color: #74c0fc;
   cursor: pointer;
-
   transition: transform 0.2s ease-in 0.1s;
 }
 .btn:first-child {
@@ -358,6 +364,14 @@ td {
     font-size: 16px;
   }
 }
+
+@media (max-width: 790px) {
+  .searching-box {
+    width: 250px;
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 768px) {
   .searching-box {
     width: 250px;
@@ -396,6 +410,51 @@ td {
     width: 120px;
   }
 }
+
+@media (max-width: 720px) {
+  .searching-box {
+    width: 80%;
+  }
+  .search {
+    flex-direction: column;
+    margin-left: 20px;
+    gap: 10px;
+  }
+  .sort-module {
+    width: 180px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 580px) {
+  .each-contact h3 {
+    font-size: 24px;
+    margin: auto 0;
+  }
+  .each-contact p {
+    font-size: 18px;
+    margin: auto 0;
+  }
+  .view-btn {
+    margin: auto 0;
+    font-size: 16px;
+    padding: 8px 0;
+    text-align: center;
+    height: 40px;
+    width: 70px;
+  }
+  .view-all-btn {
+    font-size: 16px;
+    padding: 5px;
+    width: 120px;
+    letter-spacing: 0;
+  }
+  .ed-icons {
+    height: 24px;
+    width: 24px;
+  }
+}
+
 @media (max-width: 425px) {
   .search {
     flex-direction: column;
@@ -426,8 +485,107 @@ td {
     height: 20px;
     width: 20px;
   }
+  .each-contact h3 {
+    font-size: 20px;
+    margin: auto 0;
+  }
+  .view-btn {
+    margin: auto 0;
+    font-size: 16px;
+    padding: 4px 0;
+    text-align: center;
+    height: 30px;
+    width: 50px;
+  }
+  /* .other-btn {
+    width: 20px;
+    height: 20px;
+  } */
+  .each-contact p {
+    font-size: 18px;
+    margin: auto 0;
+  }
+  .detial-section {
+    grid-column: 1/3;
+  }
+  .btn {
+    padding: 5px;
+  }
+  .ed-icons {
+    height: 24px;
+    width: 24px;
+  }
+  .star-icon {
+    width: 25px;
+    height: 25px;
+    fill: yellow;
+    margin: auto 0;
+  }
+  .each-contact {
+    background-image: none;
+    padding: 6px 10px;
+    border: 3px solid black;
+  }
+  .email-icon {
+    height: 20px;
+    width: 20px;
+    fill: #868e96;
+    stroke: black;
+  }
+
+  .ph-icon {
+    height: 20px;
+    width: 20px;
+    fill: green;
+    stroke: green;
+  }
+
+  .add-icon {
+    height: 20px;
+    width: 20px;
+    fill: #fd7e14;
+    stroke: #fd7e14;
+  }
 }
+
 @media (max-width: 375px) {
+  .searching-box {
+    width: 300px;
+    height: 34px;
+    font-size: 16px;
+  }
+  .searching-box:focus {
+    font-size: 16px;
+  }
+  .search-box-icon {
+    top: 0;
+  }
+  .each-contact {
+    column-gap: px;
+  }
+  .filter-search {
+    font-size: 16px;
+  }
+  .btn {
+    padding: 5px;
+  }
+  .ed-icons {
+    height: 20px;
+    width: 20px;
+  }
+  .view-btn {
+    font-size: 14px;
+    padding-right: 3px;
+    padding-left: 3px;
+  }
 }
+
 @media (max-width: 320px) {
+  .searching-box {
+    width: 280px;
+  }
+  .each-contact p {
+    font-size: 16px;
+    margin: auto 0;
+  }
 }
