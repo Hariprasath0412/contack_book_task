@@ -1,3 +1,7 @@
+/*-------------
+ Base settings
+ -------------- */
+
 * {
   margin: 0;
   padding: 0;
@@ -6,9 +10,8 @@
 }
 
 body {
-  max-width: 1200px;
-  margin: auto;
   background-color: #dee2e6;
+  width: 100%;
 }
 
 .contact-icon {
@@ -16,21 +19,28 @@ body {
   height: 60px;
 }
 
+/* --------------
+Header styling 
+----------------*/
 header {
   padding: 12px 12px;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   background-color: #ff922b;
+  /* width: 1440px; */
 }
 
 .heading-name {
-  padding: 0 0 0 20px;
+  padding: 0 20px;
   font-size: 32px;
   display: flex;
   align-items: center;
 }
 
+/*---------------
+ Navigation bar 
+ ---------------*/
 nav {
   padding: 10px 20px;
   text-align: end;
@@ -56,25 +66,28 @@ nav a {
   display: flex;
   align-items: center;
   background-color: #ffc078;
-  padding-right: 8px;
+  padding-right: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
-.about-app h2 {
-  font-family: "Geomini";
-  font-size: 56px;
-  text-align: center;
-  color: transparent;
-  margin-bottom: 20px;
-  font-weight: 1000;
-  letter-spacing: 2px;
-  background: linear-gradient(to bottom, #1864ab, #3bc9db);
-  /* -webkit-text-fill-color: transparent; */
-  -webkit-background-clip: text;
+main {
+  width: 1200px;
+  margin: 0 auto;
+}
+/* ------------------
+Highlighting navigation link
+------------------------ */
+
+.home-page {
+  background-color: #74c0fc;
+  outline: 3px solid blue;
 }
 
+/*----------------------------
+ Add contact form wrapper 
+ -----------------------------*/
 .main-contact-section {
   display: flex;
   justify-content: space-between;
@@ -100,10 +113,19 @@ nav a {
   margin-left: 20px;
 }
 
+.invalids {
+  padding: 5px;
+  position: absolute; /* Make the invalid message don't chnage the size of the input fields*/
+}
+/*------------------------------------
+ Phone input with country code picker 
+ -------------------------------------*/
+
 .phone-number {
   display: flex;
   gap: 10px;
 }
+
 .country-code {
   border-radius: 8px;
   background-color: white;
@@ -111,6 +133,10 @@ nav a {
   font-size: 20px;
   user-select: none;
 }
+
+/*----------------
+ Inputs and labels
+ -----------------*/
 input {
   font-size: 20px;
   padding: 10px 0px;
@@ -132,13 +158,16 @@ label {
   font-family: "Geomini";
   display: inline-block;
   margin-bottom: 10px;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 800;
   /* font-style: italic; */
   padding-right: 5px;
   letter-spacing: 1px;
 }
 
+/*------------
+ Save button 
+ ------------*/
 .add-contact-btn {
   padding: 10px 10px;
   border-radius: 10px;
@@ -155,6 +184,7 @@ label {
 
 .add-contact-btn:hover {
   transform: scale(1.1);
+  cursor: pointer;
 }
 
 .add-cont-icon {
@@ -171,6 +201,13 @@ label {
   margin: auto 0;
 }
 
+/*---------------
+  Address field 
+  ---------------*/
+.address-field {
+  margin-top: 18px;
+}
+
 textarea {
   font-size: 20px;
   padding-right: 30px;
@@ -178,7 +215,7 @@ textarea {
   width: 100%;
   padding-left: 5px;
   resize: none;
-  height: 46px;
+  height: 70px;
   border: 2px solid black;
 }
 
@@ -187,23 +224,23 @@ textarea {
 Media query close to Small laptops 
 ----------------------------------
 ----------------------------------*/
-
 @media (max-width: 1024px) {
   nav a {
     font-size: 22px;
   }
-  .heading-name {
-    font-size: 28px;
+  header {
+    width: auto;
+  }
+  main {
+    width: auto;
+    margin: 0 auto;
   }
   .contact-icon {
     margin: auto;
     width: 50px;
     height: 50px;
   }
-  .about-app h2 {
-    font-size: 40px;
-    margin-bottom: 30px;
-  }
+
   .contact-book-image {
     width: 400px;
     height: 400px;
@@ -247,10 +284,7 @@ Media query close to most tablets
   nav a {
     font-size: 16px;
   }
-  .about-app h2 {
-    font-size: 36px;
-    margin-bottom: 30px;
-  }
+
   .contact-details {
     row-gap: 40px;
   }
@@ -325,10 +359,6 @@ Media query close to most mobiles
     margin: auto 0;
   }
 
-  .about-app h2 {
-    font-size: 22px;
-    letter-spacing: 2px;
-  }
   .contact-details {
     margin-left: 0px;
     row-gap: 10px;
@@ -389,9 +419,7 @@ Media query close to most mobiles
     padding-left: 0;
     gap: 5px;
   }
-  .about-app h2 {
-    font-size: 20px;
-  }
+
   .contact-book-image {
     width: 180px;
     height: 180px;
@@ -425,10 +453,6 @@ Media query close to most mobiles
 }
 
 @media (max-width: 321px) {
-  .about-app h2 {
-    font-size: 18px;
-    letter-spacing: 1px;
-  }
   .add-contact-btn {
     margin-left: 20px;
     font-size: 12px;

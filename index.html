@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Book</title>
+
+    <!-- Base stylesheet -->
     <link rel="stylesheet" href="style.css" />
+
+    <!--All Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,7 +22,9 @@
     />
   </head>
   <body>
+    <!-- Header section -->
     <header>
+      <!-- Logo SVG -->
       <svg
         fill="#000000"
         version="1.1"
@@ -53,8 +59,10 @@
         </g>
       </svg>
       <h1 class="heading-name">Contact book</h1>
+
+      <!-- Navigation links -->
       <nav>
-        <a href="index.html"
+        <a href="index.html" class="home-page"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -71,7 +79,7 @@
           </svg>
           Home</a
         >
-        <a href="contact-page.html"
+        <a href="contact-page.html" class="view-contact-page"
           ><svg
             fill="#000000"
             width="800px"
@@ -89,17 +97,25 @@
       </nav>
     </header>
 
-    <section class="about-app">
-      <h2 class="header-name">All your contacts in one page</h2>
-    </section>
+    <!-- Main Form Section -->
     <main class="main-contact-section">
       <form class="contact-details">
+        <!-- Name field -->
         <div class="input-fields">
           <label for="person-name">Name</label>
           <br />
-          <input type="text" id="person-name" placeholder="Enter name " />
+          <input
+            type="text"
+            id="person-name"
+            placeholder="Enter name "
+            required
+          />
+          <p class="invalid-name invalids" style="display: none; color: red">
+            Name already registered
+          </p>
         </div>
 
+        <!-- Email field -->
         <div class="input-fields">
           <label for="person-mail">Email</label>
           <br />
@@ -107,25 +123,29 @@
             type="email"
             id="person-mail"
             placeholder="Enter email address"
+            required
           />
+          <p class="invalid-email invalids" style="display: none; color: red">
+            Enter Valid email
+          </p>
         </div>
 
+        <!-- Phone field -->
         <div class="input-fields">
           <label for="person-phone">Phone number</label>
           <br />
-          <div class="phone-number">
-            <select class="country-code">
-              <option value="1">+1</option>
-              <option value="2">+2</option>
-              <option value="91">+91</option>
-              <option value="92">+92</option>
-              <option value="93">+93</option>
-              <option value="999">+999</option>
-            </select>
-            <input type="tel" id="person-phone" placeholder="Enter mobile no" />
-          </div>
+          <input
+            type="tel"
+            id="person-phone"
+            placeholder="Enter mobile no"
+            required
+          />
+          <p class="invalid-phone invalids" style="display: none; color: red">
+            Enter Valid phone number
+          </p>
         </div>
 
+        <!-- Address field -->
         <div class="input-fields address-field">
           <label for="person-address">Address</label>
           <br />
@@ -133,9 +153,11 @@
             type="textarea"
             id="person-address"
             placeholder="Enter Address here"
+            required
           ></textarea>
         </div>
 
+        <!-- Submit button -->
         <button class="add-contact-btn">
           <svg
             width="800px"
@@ -177,11 +199,15 @@
           Save contact
         </button>
       </form>
+
+      <!-- Side image -->
       <img
         src="images/contact-box-stock-image.jpg"
         class="contact-book-image"
         alt="contact_book_image"
       />
     </main>
+
+    <script src="script.js"></script>
   </body>
 </html>
