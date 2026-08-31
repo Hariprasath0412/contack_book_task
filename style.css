@@ -361,7 +361,7 @@ Media query close to most mobiles
 
   .contact-details {
     margin-left: 0px;
-    row-gap: 10px;
+    row-gap: 24px;
   }
   .contact-details {
     display: flex;
@@ -378,11 +378,6 @@ Media query close to most mobiles
   }
   textarea {
     height: 70px;
-  }
-  .country-code {
-    height: 35px;
-    font-size: 14px;
-    width: 50px;
   }
 
   input {
@@ -424,15 +419,9 @@ Media query close to most mobiles
     width: 180px;
     height: 180px;
   }
-  .phone-number {
-    display: flex;
-    flex-direction: column;
-  }
-  .country-code {
-    width: 50px;
-  }
+
   .contact-details {
-    row-gap: 10px;
+    row-gap: 22px;
   }
   input {
     height: 32px;
@@ -444,11 +433,12 @@ Media query close to most mobiles
   label {
     font-size: 16px;
   }
-  .country-code {
-    height: 30px;
-  }
+
   .add-contact-btn {
     margin-right: 0;
+  }
+  .invalids {
+    font-size: 14px;
   }
 }
 
@@ -471,8 +461,7 @@ Media query close to most mobiles
   label {
     font-size: 15px;
   }
-  .country-code {
-    height: 30px;
-    font-size: 12px;
+  .invalids {
+    font-size: 11px;
   }
 }

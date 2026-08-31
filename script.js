@@ -22,30 +22,26 @@ let nameCorrectFlag,
 //Return the correct number even if it has +91/91/0
 function numberToBeStored(number) {
   let stored = number.replaceAll(" ", "").replaceAll("-", "");
-  if (stored[0] === "+") stored = stored.slice(3);
-  if (stored[0] === "0") stored = stored.slice(1);
-  // console.log(stored);
+  stored = stored.slice(-10);
   return stored;
 }
 
 //Function to get all contacts
 function getAllContacts() {
-  const store = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    store[i] = JSON.parse(localStorage.getItem(localStorage.key(i))); // getting every contacts from localstorage
+  const storeNames = [];
+  const allContacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  // console.log(allContacts);
+  for (let i = 0; i < allContacts.length; i++) {
+    storeNames[i] = allContacts[i].name; // getting every contacts from localstorage
   }
-  return store;
+  return storeNames;
 }
 
 //Function to check unique names
 function isUniqueName(name) {
-  const allContacts = getAllContacts();
-  // console.log(allContacts[0]);
-  const checkerArray = Object.entries(allContacts);
-  for (let [key, details] of checkerArray) {
-    if (details.name === name) {
-      return false;
-    }
+  const storedNames = getAllContacts();
+  for (let i = 0; i < storedNames.length; i++) {
+    if (storedNames[i] === name) return false;
   }
   return true;
 }
@@ -100,15 +96,22 @@ form.addEventListener("submit", function (e) {
     // console.log(personPhone);
     const personEmail = emailField.value.trim(); // takes the email
     const personAddress = addressField.value.trim(); // takes the address
+    const uniqueId = Date.now(); // to create uniue id for storage
     const allInputFields = {
+      unique_id: uniqueId,
       name: personName,
       email: personEmail,
       phone: personPhone,
       address: personAddress,
+      isStarred: false,
     }; // saving all inputs in an object
-    const uniqueId = Date.now(); // to create uniue id for storage
-    localStorage.setItem(uniqueId, JSON.stringify(allInputFields));
+    let contactsArray = JSON.parse(localStorage.getItem("contacts")) || [];
 
+    // console.log(contactsArray.length);
+
+    contactsArray.push(allInputFields);
+
+    localStorage.setItem("contacts", JSON.stringify(contactsArray));
     nameField.value =
       phoneField.value =
       emailField.value =

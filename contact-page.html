@@ -159,7 +159,7 @@
             stroke-linejoin="round"
           />
         </svg>
-        <select class="filter-search sort-by">
+        <select id="sort-by" class="filter-search sort-by">
           <option>Sort By</option>
           <option>A to Z</option>
           <option>Z to A</option>
@@ -404,6 +404,16 @@
     </form>
 
     <div id="overlay-on" class="overlay hidden"></div>
+
+    <!-- Asking for comfimation when delete buttton is clicked -->
+    <div id="delete-sure-box" data-key-for-delete="" class="hidden">
+      <p>Are you sure you want to delete?</p>
+      <div>
+        <button class="delete-yes delete-btns">YES</button>
+        <button class="delete-no delete-btns">NO</button>
+      </div>
+    </div>
+
     <script src="script2.js"></script>
   </body>
 </html>

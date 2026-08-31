@@ -5,55 +5,47 @@ const noContacts = document.getElementById("no-contact-display"); //For displayi
 // const viewBtn = document.getElementsByClassName(".view-btn");
 
 //Edit form Fields are tored here
-const editForm = document.getElementById("edit-form");
-const nameEditfield = document.getElementById("edit-person-name");
-const emailEditField = document.getElementById("edit-person-mail");
-const phoneEditField = document.getElementById("edit-person-phone");
-const addressEditField = document.getElementById("edit-person-address");
-const cancelBtn = document.getElementById("edit-form-cancel-btn");
+const editForm = document.getElementById("edit-form"); // edit form
+const nameEditfield = document.getElementById("edit-person-name"); // name field in edit form
+const emailEditField = document.getElementById("edit-person-mail"); // email field in edit form
+const phoneEditField = document.getElementById("edit-person-phone"); // phone field in edit form
+const addressEditField = document.getElementById("edit-person-address"); // address field in edit form
+const cancelBtn = document.getElementById("edit-form-cancel-btn"); // cancel btn in edit form
 const overlay = document.getElementById("overlay-on");
 let editkey;
-// console.log(viewBtn[0]);
+
+const deleteSureBox = document.getElementById("delete-sure-box"); // Delete confirmation box
+let deletekey;
+
+const sortByMethod = document.getElementById("sort-by"); //Sort by feature selection
+
 //ALL THE FUNCTIONS ARE HERE
 //Below function is for showing the all the contacts after comming to the page
 function getAllContacts() {
   const store = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    store[i] = JSON.parse(localStorage.getItem(localStorage.key(i))); // getting every contacts from localstorage
-  }
-  return store;
+  store.push(JSON.parse(localStorage.getItem("contacts"))); // all the contacts are pushed into an array
+  return store[0];
 }
 
 // This functions is used to both display all the contacts and also to display searched contacts
 function renderContacts(contactsToBeRendered) {
+  // console.log(contactsToBeRendered);
   contactTable.innerHTML = ""; //remove all the contacts first
   contactsToBeRendered.forEach((element) => {
-    const { name, email, phone, address } = element; // destructing each details from localstorage
-    const array = Object.entries(localStorage);
-    let keyToBeGiven; // Declared outside to store the key
-    for (let [key, value] of array) {
-      const checkingObjects = JSON.parse(value);
-      if (
-        checkingObjects.name === name &&
-        checkingObjects.email === email &&
-        checkingObjects.phone === phone
-      ) {
-        keyToBeGiven = key; // key is selected by checking its name, email, phone
-      }
-    }
-    // console.log(keyToBeGiven);
-
-    const html = `<tr data-key=${keyToBeGiven}>
+    // console.log(element);
+    const { name, email, phone, address, unique_id, isStarred } = element; // destructing each details from localstorage
+    const html = `<tr data-key=${unique_id}>
           <td class="each-contact">
             <p class="serial-no">1</p>
             <label class="person-name">
+            <button class="star-btn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="size-6 star-icon starred"
+                class="size-6 star-icon ${isStarred ? "starred" : "none"}"
               >
                 <path
                   stroke-linecap="round"
@@ -61,6 +53,7 @@ function renderContacts(contactsToBeRendered) {
                   d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
                 />
               </svg>
+              </button>
               ${name}
             </label>
 
@@ -73,7 +66,6 @@ function renderContacts(contactsToBeRendered) {
             <label class="view-btn" for="view-toggle-1">
               <span>View</span>
             </label> -->
-            <button class="view-btn">View</button>
 
             <!-- Detailed Contact section -->
             <ul class="detial-section all-toggle-detail">
@@ -156,6 +148,7 @@ function renderContacts(contactsToBeRendered) {
                   />
                 </svg>
               </button>
+
               <button class="btn delete">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -179,41 +172,75 @@ function renderContacts(contactsToBeRendered) {
   });
 }
 
+//Opening and closing delete confirmation display
+function openDeleteConfirmation() {
+  deleteSureBox.classList.remove("hidden"); // displays the confirmation box
+  overlay.classList.remove("hidden");
+}
+function closeDeleteConfirmation() {
+  deleteSureBox.classList.add("hidden"); // hides the confirmation box
+  overlay.classList.add("hidden");
+}
+
+//opening the overlay effect
 function openModal() {
-  editForm.classList.remove("hidden");
+  editForm.classList.remove("hidden"); // displays the edit form
   overlay.classList.remove("hidden");
   editForm.style.display = "flex";
 }
-
+//closing the overlay effect
 function closeModal() {
-  editForm.classList.add("hidden");
+  editForm.classList.add("hidden"); // hides the edit form
   overlay.classList.add("hidden");
   editForm.style.display = "none";
 }
+
+//Adding star to contact
 //Rendering all the available contacts at the local storage at first
 function init() {
   const store = getAllContacts();
   if (store.length === 0) {
-    noContacts.style.display = "block";
+    noContacts.style.display = "block"; // Show no contact if no contacts in localstorage
   }
   renderContacts(store);
-  // console.log(store.length);
-  // if(store)
 }
 
-init(); // initializing
+init(); // initializing the display
 
 //ALL THE EVENT LISTENERS ARE HERE
 //Delete button function using Event delegation
 contactTable.addEventListener("click", function (event) {
   const eventTarget = event.target;
+  // console.log(eventTarget);
+  if (eventTarget.closest(".star-icon")) {
+    // addStarToContact();
+    // console.log(eventTarget);
+    eventTarget.classList.toggle("starred");
+    console.log(eventTarget.classList.contains("starred"));
+    const details = event.target.closest("tr"); // the appropiate row of contacts is selected
+    // console.log(details);
+    starToggleKey = details.dataset.key;
+    // console.log(starToggleKey);
+    const allContacts = getAllContacts();
+    // console.log(allContacts);
+    const starUpdatedContact = allContacts.map((el) => {
+      console.log(el);
+      el.unique_id == starToggleKey
+        ? (el.isStarred = !el.isStarred)
+        : el.isStarred;
+      // console.log(el.isStarred);
+      return el;
+    });
+    // console.log(toggleContact);
+    // toggleContact.isStarred = true;
+    localStorage.setItem("contacts", JSON.stringify(starUpdatedContact));
+  }
   // If delete button is clicked
   if (eventTarget.closest(".delete")) {
     const details = event.target.closest("tr"); // the appropiate row of contacts is selected
-    const key = details.dataset.key; // the key is now retrived
-    localStorage.removeItem(key); // Contact detail has been removed from local storage
-    details.remove();
-    init();
+    deletekey = details.dataset.key; // the key is now retrived
+    // console.log(deletekey);
+    openDeleteConfirmation(); // opening confirmation box
   }
 
   //If edit button is clicked
@@ -221,12 +248,13 @@ contactTable.addEventListener("click", function (event) {
     const details = eventTarget.closest("tr");
     editkey = details.dataset.key;
 
-    const personData = JSON.parse(localStorage.getItem(editkey));
+    const allContacts = getAllContacts();
+    const personData = allContacts.find((el) => el.unique_id == editkey);
     console.log(personData);
     nameEditfield.value = personData.name;
     emailEditField.value = personData.email;
     phoneEditField.value = personData.phone;
-    addressEditField.value = personData.address;
+    addressEditField.value = personData.address; // copies the data into the form
     openModal();
   }
 });
@@ -235,18 +263,45 @@ contactTable.addEventListener("click", function (event) {
 editForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const updatedDetails = {
+    unique_id: Number(editkey),
     name: nameEditfield.value.trim(),
     email: emailEditField.value.trim(),
     phone: phoneEditField.value.trim(),
     address: addressEditField.value.trim(),
   };
-
-  localStorage.setItem(editkey, JSON.stringify(updatedDetails));
+  const allContacts = getAllContacts();
+  updatedContacts = allContacts.map((el) => {
+    // console.log(el.unique_id == editkey);
+    return el.unique_id == editkey ? updatedDetails : el;
+  });
+  // console.log(updatedContacts);
+  localStorage.setItem("contacts", JSON.stringify(updatedContacts)); // stores the modified data into the form
   closeModal();
   init();
 });
 
-cancelBtn.addEventListener("click", closeModal);
+cancelBtn.addEventListener("click", closeModal); // if cancel button on edit form in clicked
+
+//Confirmation of On click of delete
+deleteSureBox.addEventListener("click", function (event) {
+  const eventTarget = event.target;
+  if (eventTarget.closest(".delete-yes")) {
+    const allContacts = getAllContacts();
+    // console.log(allContacts);
+    // console.log(deletekey);
+    const withDeletedContact = allContacts.filter((el) => {
+      return el.unique_id != deletekey;
+    });
+    localStorage.setItem("contacts", JSON.stringify(withDeletedContact));
+    // console.log(withDeletedContact);
+    closeDeleteConfirmation();
+    init();
+  }
+  if (eventTarget.closest(".delete-no")) {
+    closeDeleteConfirmation(); // if cancel, close the box and no operation
+  }
+});
+
 //Searhing for the appropiate contact
 searchBox.addEventListener("input", function (event) {
   const eventTarget = event.target.value.toLowerCase();
@@ -257,4 +312,30 @@ searchBox.addEventListener("input", function (event) {
   });
 
   renderContacts(filteredContacts);
+});
+
+//Sort by A- Z or Z-A
+sortByMethod.addEventListener("change", function (event) {
+  // if(sortByMethod.value)
+  const allContacts = getAllContacts();
+  if (sortByMethod.value === "A to Z") {
+    const sortedContacts = allContacts.sort((a, b) => {
+      return b.name.localeCompare(a.name); // sorting by a to z
+    });
+    // localStorage.setItem("contacts", JSON.stringify(sortedContacts));
+    renderContacts(sortedContacts);
+  }
+
+  if (sortByMethod.value === "Z to A") {
+    const sortedContacts = allContacts.sort((a, b) => {
+      return a.name.localeCompare(b.name); // sorting by  z to a
+    });
+    // localStorage.setItem("contacts", JSON.stringify(sortedContacts));
+    renderContacts(sortedContacts);
+  }
+
+  if (sortByMethod.value === "Sort By") {
+    // localStorage.setItem("contacts", JSON.stringify(allContacts));
+    renderContacts(allContacts);
+  }
 });
