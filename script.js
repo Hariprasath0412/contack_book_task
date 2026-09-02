@@ -14,8 +14,9 @@ const invalidEmailMessage = document.querySelector(".invalid-email"); //Message 
 const phoneNumberRegex = /^((\+?91)|0)?[6-9][0-9]{9}$/; // Regex for phone number
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Regex for email
 
-let nameCorrectFlag,
-  emailCorrectFlag,
+const successSaveMessage = document.getElementById("on-successful-save");
+let nameCorrectFlag = false,
+  emailCorrectFlag = false,
   phoneCorrectFlag = false; // name, email, number flag for stablized storage (initially set to false)
 
 //ALL THE FUNCTIONS ARE HERE
@@ -27,7 +28,7 @@ function numberToBeStored(number) {
 }
 
 //Function to get all contacts
-function getAllContacts() {
+function getAllContactsNames() {
   const storeNames = [];
   const allContacts = JSON.parse(localStorage.getItem("contacts")) || [];
   // console.log(allContacts);
@@ -39,7 +40,7 @@ function getAllContacts() {
 
 //Function to check unique names
 function isUniqueName(name) {
-  const storedNames = getAllContacts();
+  const storedNames = getAllContactsNames();
   for (let i = 0; i < storedNames.length; i++) {
     if (storedNames[i] === name) return false;
   }
@@ -54,7 +55,7 @@ nameField.addEventListener("input", function (event) {
     invalidNameMessage.style.display = "none"; // dont display error when no input or input is unique
     nameCorrectFlag = true;
   } else {
-    invalidNameMessage.style.display = "block";
+    invalidNameMessage.style.display = "block"; //display error when not unique
     nameCorrectFlag = false;
   }
 });
@@ -62,10 +63,10 @@ nameField.addEventListener("input", function (event) {
 //Checking whether email is valid or not for each input
 emailField.addEventListener("input", function (event) {
   if (emailRegex.test(event.target.value) || event.target.value === "") {
-    invalidEmailMessage.style.display = "none";
+    invalidEmailMessage.style.display = "none"; // not displaying error
     emailCorrectFlag = true;
   } else {
-    invalidEmailMessage.style.display = "block";
+    invalidEmailMessage.style.display = "block"; // displaying error
     emailCorrectFlag = false;
   }
 });
@@ -77,10 +78,10 @@ phoneField.addEventListener("input", function (event) {
     .replaceAll(" ", "")
     .replaceAll("-", "");
   if (phoneNumberRegex.test(NumberToBeValid) || event.target.value === "") {
-    invalidPhoneMessage.style.display = "none";
+    invalidPhoneMessage.style.display = "none"; // not displaying error
     phoneCorrectFlag = true;
   } else {
-    invalidPhoneMessage.style.display = "block";
+    invalidPhoneMessage.style.display = "block"; // displaying error
     phoneCorrectFlag = false;
   }
 });
@@ -105,17 +106,22 @@ form.addEventListener("submit", function (e) {
       address: personAddress,
       isStarred: false,
     }; // saving all inputs in an object
-    let contactsArray = JSON.parse(localStorage.getItem("contacts")) || [];
+    const contactsArray = JSON.parse(localStorage.getItem("contacts")) || [];
 
     // console.log(contactsArray.length);
 
-    contactsArray.push(allInputFields);
+    contactsArray.push(allInputFields); // new contact is pushed into array of contacts
 
-    localStorage.setItem("contacts", JSON.stringify(contactsArray));
+    localStorage.setItem("contacts", JSON.stringify(contactsArray)); // contacts stores in localstorage
     nameField.value =
       phoneField.value =
       emailField.value =
       addressField.value =
-        "";
+        ""; // all the fields are set to empty
+
+    // successSaveMessage.classList.add("on-save");
+    // setTimeout(() => {
+    //   successSaveMessage.classList.remove("on-save");
+    // }, 1000);
   }
 });

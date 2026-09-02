@@ -1,10 +1,10 @@
-//ALL THE GLOBAL CONSTANTS ARE HERE
+//ALL THE GLOBAL CONSTANTS/VARIABLES ARE HERE
 const searchBox = document.getElementById("searching"); // searching the input
 const contactTable = document.getElementById("contact-table"); //
-const noContacts = document.getElementById("no-contact-display"); //For displaying no contacts
+const displayMessage = document.getElementById("no-contact-display"); //For displaying no contacts
 // const viewBtn = document.getElementsByClassName(".view-btn");
 
-//Edit form Fields are tored here
+//Edit form Fields are stored here
 const editForm = document.getElementById("edit-form"); // edit form
 const nameEditfield = document.getElementById("edit-person-name"); // name field in edit form
 const emailEditField = document.getElementById("edit-person-mail"); // email field in edit form
@@ -12,19 +12,53 @@ const phoneEditField = document.getElementById("edit-person-phone"); // phone fi
 const addressEditField = document.getElementById("edit-person-address"); // address field in edit form
 const cancelBtn = document.getElementById("edit-form-cancel-btn"); // cancel btn in edit form
 const overlay = document.getElementById("overlay-on");
-let editkey;
+let editkey; // edit key needed to be in global for the edit to have correct details
 
+//showing invalids for edit form
+const invalidNameMessage = document.querySelector(".invalid-edit-name"); //Message to show the invalid email
+const invalidPhoneMessage = document.querySelector(".invalid-edit-phone"); //Message to show the invalid phone number
+const invalidEmailMessage = document.querySelector(".invalid-edit-email"); //Message to show the invalid email
+const phoneNumberRegex = /^((\+?91)|0)?[6-9][0-9]{9}$/; // Regex for phone number
+const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Regex for email
+
+//Selection of body element
+const body = document.body;
+
+//flags for correct storage of data
+let nameEditCorrectFlag = true,
+  emailEditCorrectFlag = true,
+  phoneEditCorrectFlag = true;
+
+//Constants for delete operation
 const deleteSureBox = document.getElementById("delete-sure-box"); // Delete confirmation box
 let deletekey;
 
+//Other functions(sort and filter) for User Interface
 const sortByMethod = document.getElementById("sort-by"); //Sort by feature selection
+const filterMethod = document.getElementById("filter-to"); //filter feature selection
 
 //ALL THE FUNCTIONS ARE HERE
-//Below function is for showing the all the contacts after comming to the page
+//Below function is for getting the all the contacts after comming to the page
 function getAllContacts() {
-  const store = [];
-  store.push(JSON.parse(localStorage.getItem("contacts"))); // all the contacts are pushed into an array
-  return store[0];
+  const store = JSON.parse(localStorage.getItem("contacts"));
+  return store;
+}
+
+//Return the correct number even if it has +91/91/0
+function numberToBeStored(number) {
+  let stored = number.replaceAll(" ", "").replaceAll("-", "").slice(-10); // removing all spaces/dashed inside phone number
+  return stored;
+}
+
+//Function to check unique names
+function isUniqueName(name) {
+  const stored = getAllContacts();
+  for (let i = 0; i < stored.length; i++) {
+    if (stored[i].name === name) {
+      return false; // if name is already present, name is not unique
+    }
+  }
+  return true; // if name is not present, name is unique, name can be accepted
 }
 
 // This functions is used to both display all the contacts and also to display searched contacts
@@ -36,7 +70,8 @@ function renderContacts(contactsToBeRendered) {
     const { name, email, phone, address, unique_id, isStarred } = element; // destructing each details from localstorage
     const html = `<tr data-key=${unique_id}>
           <td class="each-contact">
-            <p class="serial-no">1</p>
+            <div class="avatar-circle">${name[0].toUpperCase()}</div>
+
             <label class="person-name">
             <button class="star-btn">
               <svg
@@ -67,8 +102,10 @@ function renderContacts(contactsToBeRendered) {
               <span>View</span>
             </label> -->
 
+            <button class="view-btn">View</button>
+
             <!-- Detailed Contact section -->
-            <ul class="detial-section all-toggle-detail">
+            <ul class="detial-section all-toggle-detail hidden">
               <li class="person-email">
                 <a href="mailto:${email}" target="_blank">
                   <svg
@@ -131,7 +168,7 @@ function renderContacts(contactsToBeRendered) {
             </ul>
 
             <!-- Edit / Delete buttons -->
-            <section class="other-btn all-toggle-btn">
+            <section class="other-btn all-toggle-btn hidden">
               <button class="btn edit">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -169,6 +206,7 @@ function renderContacts(contactsToBeRendered) {
           </td>
           </tr>`;
     contactTable.insertAdjacentHTML("afterbegin", html); // Adding the html to the contact table
+    // contactTable.innerHTML = html + contactTable.innerHTML;
   });
 }
 
@@ -176,10 +214,12 @@ function renderContacts(contactsToBeRendered) {
 function openDeleteConfirmation() {
   deleteSureBox.classList.remove("hidden"); // displays the confirmation box
   overlay.classList.remove("hidden");
+  body.style.overflow = "hidden"; // Prevent scrolling when overlay in effect
 }
 function closeDeleteConfirmation() {
   deleteSureBox.classList.add("hidden"); // hides the confirmation box
   overlay.classList.add("hidden");
+  body.style.overflow = "auto"; // Enablies scrolling
 }
 
 //opening the overlay effect
@@ -187,20 +227,79 @@ function openModal() {
   editForm.classList.remove("hidden"); // displays the edit form
   overlay.classList.remove("hidden");
   editForm.style.display = "flex";
+  body.style.overflow = "hidden"; // Prevent scrolling when overlay in effect
 }
 //closing the overlay effect
 function closeModal() {
   editForm.classList.add("hidden"); // hides the edit form
   overlay.classList.add("hidden");
   editForm.style.display = "none";
+  body.style.overflow = "auto"; // Enablies scrolling
 }
+
+//search filter and sort combined function
+function searchFilterAndSortCombined() {
+  const allContacts = getAllContacts();
+  const sortByValue = sortByMethod.value;
+  const filteredValue = filterMethod.value;
+  const searchValue = searchBox.value.trim().toLowerCase();
+
+  let result = allContacts;
+  if (filteredValue === "Starred") {
+    result = result.filter((el) => {
+      return el.isStarred === true;
+    });
+  }
+
+  if (searchValue) {
+    result = result.filter((el) => {
+      return el.name.toLowerCase().replaceAll(" ", "").includes(searchValue);
+    });
+  }
+
+  if (sortByValue === "A to Z") {
+    result = result.sort((a, b) => {
+      return b.name.localeCompare(a.name);
+    });
+  } else if (sortByValue === "Z to A") {
+    result = result.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
+  }
+
+  renderContacts(result);
+}
+
+// //sorting function
+// function sortingBy(sort) {
+//   const allContacts = getAllContacts();
+
+//   if (sort === "Sort By") return allContacts;
+//   // console.log(allContacts);
+//   sortedContacts = allContacts.sort((a, b) => {
+//     return b.name.localeCompare(a.name); // sorting by a to z
+//   });
+//   if (sort === "A to Z") return sortedContacts; // From a to z
+//   if (sort === "Z to A") return sortedContacts.reverse(); // from z to a after reverse
+// }
+
+// //filtering function
+// function filterTo(filter) {
+//   const allContacts = getAllContacts();
+//   if (filter === "Filter") return allContacts;
+//   filteredContacts = allContacts.filter((el) => {
+//     return el.isStarred === true; //Filtering out the starred contacts
+//   });
+//   if (filter === "Starred") return filteredContacts;
+// }
 
 //Adding star to contact
 //Rendering all the available contacts at the local storage at first
 function init() {
   const store = getAllContacts();
   if (store.length === 0) {
-    noContacts.style.display = "block"; // Show no contact if no contacts in localstorage
+    displayMessage.innerText = " No contacts Yet";
+    displayMessage.style.display = "block"; // Show no contact if no contacts in localstorage
   }
   renderContacts(store);
 }
@@ -211,35 +310,17 @@ init(); // initializing the display
 //Delete button function using Event delegation
 contactTable.addEventListener("click", function (event) {
   const eventTarget = event.target;
-  // console.log(eventTarget);
-  if (eventTarget.closest(".star-icon")) {
-    // addStarToContact();
-    // console.log(eventTarget);
-    eventTarget.classList.toggle("starred");
-    console.log(eventTarget.classList.contains("starred"));
-    const details = event.target.closest("tr"); // the appropiate row of contacts is selected
-    // console.log(details);
-    starToggleKey = details.dataset.key;
-    // console.log(starToggleKey);
-    const allContacts = getAllContacts();
-    // console.log(allContacts);
-    const starUpdatedContact = allContacts.map((el) => {
-      console.log(el);
-      el.unique_id == starToggleKey
-        ? (el.isStarred = !el.isStarred)
-        : el.isStarred;
-      // console.log(el.isStarred);
-      return el;
-    });
-    // console.log(toggleContact);
-    // toggleContact.isStarred = true;
-    localStorage.setItem("contacts", JSON.stringify(starUpdatedContact));
+  if (eventTarget.closest(".view-btn")) {
+    eventTarget.nextElementSibling.classList.toggle("hidden");
+    eventTarget.nextElementSibling.nextElementSibling.classList.toggle(
+      "hidden",
+    );
   }
-  // If delete button is clicked
+
   if (eventTarget.closest(".delete")) {
+    // If delete button is clicked
     const details = event.target.closest("tr"); // the appropiate row of contacts is selected
     deletekey = details.dataset.key; // the key is now retrived
-    // console.log(deletekey);
     openDeleteConfirmation(); // opening confirmation box
   }
 
@@ -250,34 +331,100 @@ contactTable.addEventListener("click", function (event) {
 
     const allContacts = getAllContacts();
     const personData = allContacts.find((el) => el.unique_id == editkey);
-    console.log(personData);
+    openModal();
+
     nameEditfield.value = personData.name;
     emailEditField.value = personData.email;
     phoneEditField.value = personData.phone;
     addressEditField.value = personData.address; // copies the data into the form
-    openModal();
+  }
+
+  if (eventTarget.closest(".star-icon")) {
+    // addStarToContact();
+    // console.log(eventTarget);
+    eventTarget.classList.toggle("starred");
+    const details = event.target.closest("tr"); // the appropiate row of contacts is selected
+    // console.log(details);
+    starToggleKey = details.dataset.key;
+    // console.log(starToggleKey);
+    const allContacts = getAllContacts();
+    // console.log(allContacts);
+    const starUpdatedContact = allContacts.map((el) => {
+      // console.log(el);
+      el.unique_id == starToggleKey
+        ? (el.isStarred = !el.isStarred)
+        : el.isStarred;
+      return el;
+    }); // the above code is to make sure isStarred is updated
+
+    localStorage.setItem("contacts", JSON.stringify(starUpdatedContact));
+    renderContacts(starUpdatedContact);
+  }
+});
+
+// Checking whether email input is correct inside for each input
+nameEditfield.addEventListener("input", function (event) {
+  const currentName = event.target.value.trim();
+  // console.log(currentName);
+  if (isUniqueName(currentName) || event.target.value === "") {
+    invalidNameMessage.style.display = "none"; // dont display error when no input or input is unique
+    nameEditCorrectFlag = true;
+  } else {
+    invalidNameMessage.style.display = "block";
+    nameEditCorrectFlag = false;
+  }
+});
+
+//Checking whether email is valid or not for each input
+emailEditField.addEventListener("input", function (event) {
+  if (emailRegex.test(event.target.value) || event.target.value === "") {
+    invalidEmailMessage.style.display = "none";
+    emailEditCorrectFlag = true;
+  } else {
+    invalidEmailMessage.style.display = "block";
+    emailEditCorrectFlag = false;
+  }
+});
+
+// Checking whether phone input is correct inside for each input
+phoneEditField.addEventListener("input", function (event) {
+  const NumberToBeValid = event.target.value
+    .replaceAll(" ", "")
+    .replaceAll("-", "");
+  if (phoneNumberRegex.test(NumberToBeValid) || event.target.value === "") {
+    invalidPhoneMessage.style.display = "none";
+    phoneEditCorrectFlag = true;
+  } else {
+    invalidPhoneMessage.style.display = "block";
+    phoneEditCorrectFlag = false;
   }
 });
 
 //ON submittion of edit form
 editForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  const updatedDetails = {
-    unique_id: Number(editkey),
-    name: nameEditfield.value.trim(),
-    email: emailEditField.value.trim(),
-    phone: phoneEditField.value.trim(),
-    address: addressEditField.value.trim(),
-  };
-  const allContacts = getAllContacts();
-  updatedContacts = allContacts.map((el) => {
-    // console.log(el.unique_id == editkey);
-    return el.unique_id == editkey ? updatedDetails : el;
-  });
-  // console.log(updatedContacts);
-  localStorage.setItem("contacts", JSON.stringify(updatedContacts)); // stores the modified data into the form
-  closeModal();
-  init();
+  if (nameEditCorrectFlag && phoneEditCorrectFlag && emailEditCorrectFlag) {
+    const updatedDetails = {
+      unique_id: Number(editkey),
+      name: nameEditfield.value.trim(),
+      email: emailEditField.value.trim(),
+      phone: numberToBeStored(phoneEditField.value),
+      address: addressEditField.value.trim(),
+    }; //updated contact details
+    const allContacts = getAllContacts();
+    updatedContacts = allContacts.map((el) => {
+      // console.log(el.unique_id == editkey);
+      if (el.unique_id == editkey) {
+        updatedDetails.isStarred = el.isStarred; // copying the isStarred value after editing details
+        return updatedDetails;
+      }
+      return el;
+    });
+    // console.log(updatedContacts);
+    localStorage.setItem("contacts", JSON.stringify(updatedContacts)); // stores the modified data into the form
+    closeModal(); // close the edit form
+    init(); // initialize the page
+  }
 });
 
 cancelBtn.addEventListener("click", closeModal); // if cancel button on edit form in clicked
@@ -290,52 +437,95 @@ deleteSureBox.addEventListener("click", function (event) {
     // console.log(allContacts);
     // console.log(deletekey);
     const withDeletedContact = allContacts.filter((el) => {
-      return el.unique_id != deletekey;
+      return el.unique_id != deletekey; // filtering out the deleted contact
     });
     localStorage.setItem("contacts", JSON.stringify(withDeletedContact));
     // console.log(withDeletedContact);
-    closeDeleteConfirmation();
-    init();
+    closeDeleteConfirmation(); // closing confirmation box
+    init(); // initialize the display after each delete
   }
   if (eventTarget.closest(".delete-no")) {
     closeDeleteConfirmation(); // if cancel, close the box and no operation
   }
 });
 
-//Searhing for the appropiate contact
-searchBox.addEventListener("input", function (event) {
-  const eventTarget = event.target.value.toLowerCase();
-  const store = getAllContacts();
+searchBox.addEventListener("input", searchFilterAndSortCombined);
+sortByMethod.addEventListener("change", searchFilterAndSortCombined);
+filterMethod.addEventListener("change", searchFilterAndSortCombined);
 
-  const filteredContacts = store.filter((contact) => {
-    return contact.name.toLowerCase().includes(eventTarget);
-  });
+// //Searhing for the appropiate contact
+// searchBox.addEventListener("input", function (event) {
+//   const eventTarget = event.target.value.toLowerCase();
+//   const store = getAllContacts();
 
-  renderContacts(filteredContacts);
-});
+//   const filteredContacts = store.filter((contact) => {
+//     return contact.name.toLowerCase().replaceAll(" ", "").includes(eventTarget);
+//   });
+//   if (!filteredContacts.length) {
+//     displayMessage.innerText = "No contacts found";
+//     displayMessage.style.display = "block";
+//   } else {
+//     // displayMessage.innerText = " No contacts yet";
+//     displayMessage.style.display = "none";
+//   }
+//   renderContacts(filteredContacts);
+// });
 
-//Sort by A- Z or Z-A
-sortByMethod.addEventListener("change", function (event) {
-  // if(sortByMethod.value)
-  const allContacts = getAllContacts();
-  if (sortByMethod.value === "A to Z") {
-    const sortedContacts = allContacts.sort((a, b) => {
-      return b.name.localeCompare(a.name); // sorting by a to z
-    });
-    // localStorage.setItem("contacts", JSON.stringify(sortedContacts));
-    renderContacts(sortedContacts);
-  }
+// //Sort by A- Z or Z-A
+// sortByMethod.addEventListener("change", function (event) {
+//   // const allContacts = getAllContacts();
+//   // let sortedContacts;
+//   // if (sortByMethod.value === "A to Z") {
+//   //   // sortedContacts = allContacts.sort((a, b) => {
+//   //   //   return b.name.localeCompare(a.name); // sorting by a to z
+//   //   // });
+//   //   sortedContacts = sortingBy(sortByMethod.value);
+//   // }
 
-  if (sortByMethod.value === "Z to A") {
-    const sortedContacts = allContacts.sort((a, b) => {
-      return a.name.localeCompare(b.name); // sorting by  z to a
-    });
-    // localStorage.setItem("contacts", JSON.stringify(sortedContacts));
-    renderContacts(sortedContacts);
-  }
+//   // if (sortByMethod.value === "Z to A") {
+//   //   // sortedContacts = allContacts.sort((a, b) => {
+//   //   //   return a.name.localeCompare(b.name); // sorting by z to a
+//   //   // });
+//   //   sortedContacts = sortingBy(sortByMethod.value);
+//   // }
 
-  if (sortByMethod.value === "Sort By") {
-    // localStorage.setItem("contacts", JSON.stringify(allContacts));
-    renderContacts(allContacts);
-  }
-});
+//   // if (sortByMethod.value === "Sort By") {
+//   //   // sortedContacts = allContacts;
+//   //   sortedContacts = sortingBy(sortByMethod.value);
+//   // }
+
+//   // const sortedContacts = sortingBy(sortByMethod.value);
+//   // renderContacts(sortedContacts);
+
+//   const sortedContacts = sortingBy(sortByMethod.value);
+//   const filteredContacts = filterTo(filterMethod.value);
+//   const CommonContacts = new Set(filteredContacts.map((obj) => obj.unique_id));
+//   const finalContacts = sortedContacts.filter((el) =>
+//     CommonContacts.has(el.unique_id),
+//   );
+//   renderContacts(finalContacts);
+// });
+
+// //Filter by oldest and starred
+// filterMethod.addEventListener("change", function (event) {
+//   // const allContacts = getAllContacts();
+//   // let filteredContacts;
+//   // if (filterMethod.value === "Starred") {
+//   //   filteredContacts = allContacts.filter((el) => {
+//   //     return el.isStarred === true;
+//   //   });
+//   // }
+//   // if (filterMethod.value === "Filter") {
+//   //   filteredContacts = allContacts;
+//   // }
+//   // const filteredContacts = filterTo(filterMethod.value);
+//   // renderContacts(filteredContacts);
+
+//   const filteredContacts = filterTo(filterMethod.value);
+//   const sortedContacts = sortingBy(sortByMethod.value);
+//   const CommonContacts = new Set(sortedContacts.map((obj) => obj.unique_id));
+//   const finalContacts = filteredContacts.filter((el) =>
+//     CommonContacts.has(el.unique_id),
+//   );
+//   renderContacts(finalContacts);
+// });

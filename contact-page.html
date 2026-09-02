@@ -133,10 +133,9 @@
             d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
           />
         </svg>
-        <select class="filter-search">
+        <select class="filter-search" id="filter-to">
           <option>Filter</option>
-          <option>Most recent</option>
-          <option>Oldest</option>
+          <!-- <option>Oldest</option> -->
           <option>Starred</option>
         </select>
       </div>
@@ -197,7 +196,8 @@
         <!-- Contact 1 -->
         <tr>
           <td class="each-contact">
-            <p class="serial-no">1</p>
+            <div class="avatar-circle">H</div>
+            <!-- <p class="serial-no">1</p> -->
             <label class="person-name">
               Hariprasath
               <svg
@@ -344,6 +344,9 @@
           placeholder="Enter name "
           required
         />
+        <p class="invalid-edit-name invalids" style="display: none; color: red">
+          Name already registered
+        </p>
       </div>
 
       <!-- Editing n field -->
@@ -356,6 +359,12 @@
           placeholder="Enter email address"
           required
         />
+        <p
+          class="invalid-edit-email invalids"
+          style="display: none; color: red"
+        >
+          Enter Valid email
+        </p>
       </div>
 
       <!-- Editing name field -->
@@ -368,9 +377,12 @@
           placeholder="Enter mobile no"
           required
         />
-        <!-- <p class="invalid-phone" style="display: none; color: red">
+        <p
+          class="invalid-edit-phone invalids"
+          style="display: none; color: red"
+        >
           Enter Valid phone number
-        </p> -->
+        </p>
       </div>
 
       <!-- Editing name field -->
