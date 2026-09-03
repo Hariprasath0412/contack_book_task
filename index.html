@@ -64,20 +64,18 @@
       <nav>
         <a href="index.html" class="home-page"
           ><svg
+            fill="#000000"
+            width="800px"
+            height="800px"
+            viewBox="-3 0 19 19"
             xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-6 nav-icon"
+            class="cf-icon-svg nav-icon"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+              d="M12.711 9.182a1.03 1.03 0 0 1-1.03 1.03H7.53v4.152a1.03 1.03 0 0 1-2.058 0v-4.152H1.318a1.03 1.03 0 1 1 0-2.059h4.153V4.001a1.03 1.03 0 0 1 2.058 0v4.152h4.153a1.03 1.03 0 0 1 1.029 1.03z"
             />
           </svg>
-          Home</a
+          Add Contact</a
         >
         <a href="contact-page.html" class="view-contact-page"
           ><svg
@@ -99,7 +97,7 @@
 
     <!-- Main Form Section -->
     <main class="main-contact-section">
-      <form class="contact-details">
+      <form class="contact-details" id="contact-details">
         <!-- Name field -->
         <div class="input-fields">
           <label for="person-name">Name</label>
@@ -110,8 +108,12 @@
             placeholder="Enter name "
             required
           />
-          <p class="invalid-name invalids" style="display: none; color: red">
-            Name already registered
+          <p
+            class="invalid-name invalids"
+            id="invalid-name"
+            style="display: none; color: red"
+          >
+            Enter valid Name
           </p>
         </div>
 
@@ -125,7 +127,11 @@
             placeholder="Enter email address"
             required
           />
-          <p class="invalid-email invalids" style="display: none; color: red">
+          <p
+            class="invalid-email invalids"
+            id="invalid-email"
+            style="display: none; color: red"
+          >
             Enter Valid email
           </p>
         </div>
@@ -140,7 +146,11 @@
             placeholder="Enter mobile no"
             required
           />
-          <p class="invalid-phone invalids" style="display: none; color: red">
+          <p
+            class="invalid-phone invalids"
+            id="invalid-phone"
+            style="display: none; color: red"
+          >
             Enter Valid phone number
           </p>
         </div>
@@ -153,6 +163,7 @@
             type="textarea"
             id="person-address"
             placeholder="Enter Address here"
+            minlength="8"
             required
           ></textarea>
         </div>
@@ -207,7 +218,7 @@
         alt="contact_book_image"
       />
 
-      <div id="on-successful-save" class="">Contact saved successfully</div>
+      <div id="on-successful-save" class="">Contact saved</div>
     </main>
 
     <script src="script.js"></script>

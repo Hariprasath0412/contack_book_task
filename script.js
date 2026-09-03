@@ -1,57 +1,53 @@
 "use strict";
 //ALL THE GLOBAL CONSTANT ARE AT THE TOP OF THE SCRIPT
-const form = document.querySelector(".contact-details"); // the whole input form
+const form = document.getElementById("contact-details"); // the whole input form
 const nameField = document.getElementById("person-name"); // name input fied
 const emailField = document.getElementById("person-mail"); // email input field
 const phoneField = document.getElementById("person-phone"); //phone number input field
-const addressField = document.getElementById("person-address"); // adddress input field
-const submitBtn = document.querySelector(".add-contact-btn"); // submit button
 
-const invalidNameMessage = document.querySelector(".invalid-name"); //Message to show the invalid email
-const invalidPhoneMessage = document.querySelector(".invalid-phone"); //Message to show the invalid phone number
-const invalidEmailMessage = document.querySelector(".invalid-email"); //Message to show the invalid email
-
-const phoneNumberRegex = /^((\+?91)|0)?[6-9][0-9]{9}$/; // Regex for phone number
-const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Regex for email
-
-const successSaveMessage = document.getElementById("on-successful-save");
 let nameCorrectFlag = false,
   emailCorrectFlag = false,
-  phoneCorrectFlag = false; // name, email, number flag for stablized storage (initially set to false)
+  phoneCorrectFlag = false; // email, number flag for stablized/valid storage (initially set to false)
 
 //ALL THE FUNCTIONS ARE HERE
-//Return the correct number even if it has +91/91/0
-function numberToBeStored(number) {
-  let stored = number.replaceAll(" ", "").replaceAll("-", "");
-  stored = stored.slice(-10);
-  return stored;
+//Below function is for getting the all the contacts after comming to the page
+function getAllContacts() {
+  const store = JSON.parse(localStorage.getItem("contacts")) || [];
+  return store;
 }
 
-//Function to get all contacts
-function getAllContactsNames() {
-  const storeNames = [];
-  const allContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  // console.log(allContacts);
-  for (let i = 0; i < allContacts.length; i++) {
-    storeNames[i] = allContacts[i].name; // getting every contacts from localstorage
-  }
-  return storeNames;
-}
-
-//Function to check unique names
-function isUniqueName(name) {
-  const storedNames = getAllContactsNames();
-  for (let i = 0; i < storedNames.length; i++) {
-    if (storedNames[i] === name) return false;
+// Function to check unique emails or phone numbers
+function isUniqueEmailOrPhone(fieldType, value) {
+  const stored = getAllContacts();
+  for (let i = 0; i < stored.length; i++) {
+    if (stored[i][fieldType] === value) {
+      return false;
+    }
   }
   return true;
 }
 
-//ALL THE EVENT LISTENERS ARE HERE
+//Return the correcmber even if it has +91/91/0
+function numberToBeStored(number) {
+  let stored = number.replaceAll(" ", "").replaceAll("-", "").slice(-10); //
+  return stored;
+}
+// Function to display success message
+function showSuccessMessage() {
+  const successMessage = document.getElementById("on-successful-save"); // gets the success message
+  successMessage.classList.add("on-save"); // succes message gets displayed
+  setTimeout(() => {
+    successMessage.classList.remove("on-save"); // after some time, the message vanisheds
+  }, 800);
+}
+
+// ALL THE EVENT LISTENERS ARE HERE
 // Checking whether email input is correct inside for each input
 nameField.addEventListener("input", function (event) {
   const currentName = event.target.value.trim();
-  if (isUniqueName(currentName) || event.target.value === "") {
+  const nameRegex = /^[a-zA-Z]/;
+  const invalidNameMessage = document.getElementById("invalid-name"); //Message to show the invalid email
+  if (nameRegex.test(currentName) || event.target.value === "") {
     invalidNameMessage.style.display = "none"; // dont display error when no input or input is unique
     nameCorrectFlag = true;
   } else {
@@ -62,10 +58,21 @@ nameField.addEventListener("input", function (event) {
 
 //Checking whether email is valid or not for each input
 emailField.addEventListener("input", function (event) {
-  if (emailRegex.test(event.target.value) || event.target.value === "") {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,}$/; // Regex for email
+  const currentEmail = event.target.value;
+  const invalidEmailMessage = document.getElementById("invalid-email"); //Message to show the invalid email
+
+  if (
+    (emailRegex.test(currentEmail) &&
+      isUniqueEmailOrPhone("email", currentEmail)) ||
+    currentEmail === ""
+  ) {
     invalidEmailMessage.style.display = "none"; // not displaying error
     emailCorrectFlag = true;
   } else {
+    invalidEmailMessage.textContent = emailRegex.test(currentEmail)
+      ? "Email already exists"
+      : "Enter valid Email";
     invalidEmailMessage.style.display = "block"; // displaying error
     emailCorrectFlag = false;
   }
@@ -73,28 +80,35 @@ emailField.addEventListener("input", function (event) {
 
 // Checking whether phone input is correct inside for each input
 phoneField.addEventListener("input", function (event) {
-  // console.log(phoneNumberRegex.test(event.target.value));
-  const NumberToBeValid = event.target.value
-    .replaceAll(" ", "")
-    .replaceAll("-", "");
-  if (phoneNumberRegex.test(NumberToBeValid) || event.target.value === "") {
+  const NumberToBeValid = event.target.value.replaceAll(/[\s.-]/g, "");
+  const phoneNumberRegex = /^((\+?91)|0)?[6-9][0-9]{9}$/; // Regex for phone number
+  const invalidPhoneMessage = document.getElementById("invalid-phone"); //Message to show the invalid phone number
+
+  if (
+    (phoneNumberRegex.test(NumberToBeValid) &&
+      isUniqueEmailOrPhone("phone", NumberToBeValid.slice(-10))) ||
+    event.target.value === ""
+  ) {
     invalidPhoneMessage.style.display = "none"; // not displaying error
     phoneCorrectFlag = true;
   } else {
+    invalidPhoneMessage.textContent = phoneNumberRegex.test(NumberToBeValid)
+      ? "Phone number already exists"
+      : "Enter valid phone number";
     invalidPhoneMessage.style.display = "block"; // displaying error
     phoneCorrectFlag = false;
   }
 });
 
 //Final submittion of the form
-form.addEventListener("submit", function (e) {
-  e.preventDefault(); //    To prevent default reload of a submit button
+form.addEventListener("submit", function (event) {
+  event.preventDefault(); //    To prevent default reload of a submit button
+  const addressField = document.getElementById("person-address"); // adddress input field
 
-  if (emailCorrectFlag && phoneCorrectFlag && nameCorrectFlag) {
+  if (nameCorrectFlag && emailCorrectFlag && phoneCorrectFlag) {
     //trim() to remove leading and lagging spaces
     const personName = nameField.value.trim(); // takes the name
     const personPhone = numberToBeStored(phoneField.value); // takes the phone number
-    // console.log(personPhone);
     const personEmail = emailField.value.trim(); // takes the email
     const personAddress = addressField.value.trim(); // takes the address
     const uniqueId = Date.now(); // to create uniue id for storage
@@ -104,11 +118,10 @@ form.addEventListener("submit", function (e) {
       email: personEmail,
       phone: personPhone,
       address: personAddress,
-      isStarred: false,
+      isStarred: false, // star value to make the contact starred
     }; // saving all inputs in an object
-    const contactsArray = JSON.parse(localStorage.getItem("contacts")) || [];
 
-    // console.log(contactsArray.length);
+    const contactsArray = getAllContacts();
 
     contactsArray.push(allInputFields); // new contact is pushed into array of contacts
 
@@ -118,10 +131,6 @@ form.addEventListener("submit", function (e) {
       emailField.value =
       addressField.value =
         ""; // all the fields are set to empty
-
-    // successSaveMessage.classList.add("on-save");
-    // setTimeout(() => {
-    //   successSaveMessage.classList.remove("on-save");
-    // }, 1000);
+    showSuccessMessage();
   }
 });

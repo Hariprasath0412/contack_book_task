@@ -26,7 +26,7 @@ header {
   padding: 12px 12px;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   background-color: #ff922b;
   /* width: 1440px; */
 }
@@ -221,23 +221,43 @@ textarea {
 
 #on-successful-save {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 10%;
+  right: 15px;
+  /* transform: translate(-50%, -50%); */
   background-color: #29bf12;
-  padding: 30px 50px;
+  padding: 10px 8px;
   font-size: 24px;
   font-weight: 600;
   border-radius: 12px;
   color: #ffffff;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  display: none;
+
+  /* Initial hidden state for smooth transition */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0.4s ease;
   z-index: 1000;
-  transition: opacity 0.3s ease-in-out;
 }
 #on-successful-save.on-save {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
+
+/* @keyframes fadeIn {
+  form {
+    opacity: 0;
+    transform: translate(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0);
+  }
+} */
 /* --------------------------------
 -----------------------------------
 Media query close to Small laptops 
@@ -251,7 +271,7 @@ Media query close to Small laptops
     width: auto;
   }
   main {
-    width: auto;
+    width: 95%;
     margin: 0 auto;
   }
   .contact-icon {
@@ -354,6 +374,9 @@ Media query close to most mobiles
 ----------------------------------*/
 
 @media (max-width: 426px) {
+  header {
+    padding: 0px 12px;
+  }
   .heading-name {
     font-size: 20px;
     padding-left: 10px;
@@ -422,6 +445,10 @@ Media query close to most mobiles
     padding: 10px;
     margin-left: 30px;
   }
+  #on-successful-save {
+    top: 18%;
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 376px) {
@@ -441,9 +468,6 @@ Media query close to most mobiles
 
   .contact-details {
     row-gap: 22px;
-  }
-  input {
-    height: 32px;
   }
   input,
   input:focus {
