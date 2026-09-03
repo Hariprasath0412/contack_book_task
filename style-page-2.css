@@ -16,10 +16,8 @@ body {
   background-color: #dee2e6;
   width: 100%;
   height: 100vh;
-  /* overflow: auto; */
   display: flex;
   flex-direction: column;
-  /* overflow: hidden; */
 }
 
 .contact-icon {
@@ -147,7 +145,6 @@ option {
   border: none;
   font-size: 20px;
   font-weight: 700;
-  /* padding-right: 50px; */
 }
 
 .filter-module {
@@ -226,8 +223,6 @@ Contacts Table
   display: flex;
   flex-direction: column;
   max-height: 100vh;
-  /* overflow: hidden; */
-  /* flex: 1; */
   min-height: 0;
 }
 
@@ -239,11 +234,6 @@ Contacts Table
   width: 100%;
   overflow-y: auto;
   scrollbar-width: thin;
-  /* overflow-x: hidden; */
-  /* margin-top: 20px; */
-  /* overflow-y: auto;
-  overflow-x: hidden; */
-  /* max-height: 100%; */
 }
 
 button {
@@ -342,11 +332,6 @@ tr {
   width: 100%;
   overflow: scroll;
   scrollbar-width: none;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  /* display: flex;
-  align-items: center;
-  justify-self: center; */
 }
 
 .avatar-circle {
@@ -369,16 +354,9 @@ tr {
   padding: 10px;
   display: flex;
   align-items: center;
-
-  /* white-space: nowrap;
-  overflow: scroll;
-  text-overflow: ellipsis;
-  width: 100%; */
 }
 .detial-section li:first-child {
-  white-space: nowrap;
   overflow: scroll;
-  text-overflow: ellipsis;
   width: 100%;
   scrollbar-width: none;
 }
@@ -452,10 +430,7 @@ Action buttons container
   cursor: pointer;
   transition: transform 0.2s ease-in 0.1s;
 }
-/* 
-.hidden {
-  display: none;
-} */
+
 /* --------------------------
 Edit and delete button colors
 ----------------------------- */
@@ -552,8 +527,6 @@ Edit and delete button colors
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   border: 2px solid #dee2e6;
   text-align: center;
-
-  /* gap: 20px; */
 }
 
 .delete-btns {
@@ -637,9 +610,6 @@ Media query close to most tablets
     font-size: 18px;
     padding-left: 40px;
   }
-  /* .sort-module {
-    width: 210px;
-  } */
   .filter-module {
     width: 210px;
   }
